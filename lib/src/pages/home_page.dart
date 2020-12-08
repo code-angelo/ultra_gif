@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:ultra_gif/src/search/search_delegate.dart';
-
 import '../colors.dart';
 
 class HomePage extends StatelessWidget {

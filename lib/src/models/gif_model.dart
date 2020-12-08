@@ -1,6 +1,6 @@
 class Gifs{
 
-  List<Gif> item = List();
+  List<Gif> items = List();
 
   Gifs();
 
@@ -9,7 +9,7 @@ class Gifs{
 
     for (final item in jsonList){
       final gif = new Gif.fromJsonMap(item);
-      item.add(gif);
+      items.add(gif);
     }
   }
 }
@@ -29,13 +29,9 @@ class Gif {
   String contentUrl;
   String sourceTld;
   String sourcePostUrl;
-  int isSticker;
   String importDatetime;
   String trendingDatetime;
   Images images;
-  User user;
-  String analyticsResponsePayload;
-  Analytics analytics;
 
   Gif({
     this.type,
@@ -52,13 +48,9 @@ class Gif {
     this.contentUrl,
     this.sourceTld,
     this.sourcePostUrl,
-    this.isSticker,
     this.importDatetime,
     this.trendingDatetime,
     this.images,
-    this.user,
-    this.analyticsResponsePayload,
-    this.analytics,
   });
 
   Gif.fromJsonMap(Map<String, dynamic> json){
@@ -76,164 +68,38 @@ class Gif {
     contentUrl                = json['content_url'];
     sourceTld                 = json['source_tld'];
     sourcePostUrl             = json['source_post_url'];
-    isSticker                 = json['is_sticker'].cast<int>();
     importDatetime            = json['import_datetime'];
     trendingDatetime          = json['trending_datetime'];
-    images                    = json['images'];
-    user                      = json['user'];
-    analyticsResponsePayload  = json['analytics_response_payload'];
-    analytics                 = json['analytics'];
+    images                    = Images.fromJsonMap(json['images']);
   }
 }
 
-class Analytics {
-  Onclick onload;
-  Onclick onclick;
-  Onclick onsent;
-
-  Analytics({
-    this.onload,
-    this.onclick,
-    this.onsent,
-  });
-}
-
-class Onclick {
-  String url;
-
-  Onclick({
-    this.url,
-  });
-}
-
 class Images {
-  Map<String, String> original;
-  The480WStill downsized;
-  The480WStill downsizedLarge;
-  The480WStill downsizedMedium;
-  DownsizedSmall downsizedSmall;
-  The480WStill downsizedStill;
-  Map<String, String> fixedHeight;
-  Map<String, String> fixedHeightDownsampled;
-  Map<String, String> fixedHeightSmall;
-  The480WStill fixedHeightSmallStill;
-  The480WStill fixedHeightStill;
-  Map<String, String> fixedWidth;
-  Map<String, String> fixedWidthDownsampled;
-  Map<String, String> fixedWidthSmall;
-  The480WStill fixedWidthSmallStill;
-  The480WStill fixedWidthStill;
-  Map<String, String> looping;
-  The480WStill originalStill;
-  DownsizedSmall originalMp4;
-  DownsizedSmall preview;
-  The480WStill previewGif;
-  The480WStill previewWebp;
-  DownsizedSmall hd;
-  The480WStill the480WStill;
-
+  Original original;
+  
   Images({
-    this.original,
-    this.downsized,
-    this.downsizedLarge,
-    this.downsizedMedium,
-    this.downsizedSmall,
-    this.downsizedStill,
-    this.fixedHeight,
-    this.fixedHeightDownsampled,
-    this.fixedHeightSmall,
-    this.fixedHeightSmallStill,
-    this.fixedHeightStill,
-    this.fixedWidth,
-    this.fixedWidthDownsampled,
-    this.fixedWidthSmall,
-    this.fixedWidthSmallStill,
-    this.fixedWidthStill,
-    this.looping,
-    this.originalStill,
-    this.originalMp4,
-    this.preview,
-    this.previewGif,
-    this.previewWebp,
-    this.hd,
-    this.the480WStill,
+    this.original
   });
-}
 
-class The480WStill {
+  Images.fromJsonMap(Map<String, dynamic> json){
+    original  = Original.fromJsonMap(json['original']);
+  }
+}
+  
+class Original {
+  String imageUrl;
   String height;
   String width;
-  String size;
-  String url;
 
-  The480WStill({
+  Original({
+    this.imageUrl,
     this.height,
-    this.width,
-    this.size,
-    this.url,
+    this.width
   });
-}
 
-class DownsizedSmall {
-  String height;
-  String width;
-  String mp4Size;
-  String mp4;
-
-  DownsizedSmall({
-    this.height,
-    this.width,
-    this.mp4Size,
-    this.mp4,
-  });
-}
-
-class User {
-  String avatarUrl;
-  String bannerImage;
-  String bannerUrl;
-  String profileUrl;
-  String username;
-  String displayName;
-  String description;
-  String instagramUrl;
-  String websiteUrl;
-  bool isVerified;
-
-  User({
-    this.avatarUrl,
-    this.bannerImage,
-    this.bannerUrl,
-    this.profileUrl,
-    this.username,
-    this.displayName,
-    this.description,
-    this.instagramUrl,
-    this.websiteUrl,
-    this.isVerified,
-  });
-}
-
-class Meta {
-  int status;
-  String msg;
-  String responseId;
-
-  Meta({
-    this.status,
-    this.msg,
-    this.responseId,
-  });
-}
-
-class Pagination {
-  int totalCount;
-  int count;
-  int offset;
-
-  Pagination({
-    this.totalCount,
-    this.count,
-    this.offset,
-  });
+  Original.fromJsonMap(Map<String, dynamic> json){
+    imageUrl  = json['url'];
+    height    = json['height'] ;
+    width    = json['width'] ;
+  }
 }

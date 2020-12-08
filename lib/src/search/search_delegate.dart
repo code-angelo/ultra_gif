@@ -1,21 +1,29 @@
 import 'package:flutter/material.dart';
 
+import 'package:ultra_gif/src/colors.dart';
+
 
 class DataSearch extends SearchDelegate{
 
-  // final peliculasProvider = new PeliculasProviders();
+  String results = '';
 
-
-  String seleccion = '';
+  ThemeData appBarTheme(BuildContext context){
+    final ThemeData theme = Theme.of(context);
+    return theme.copyWith(
+    primaryColor: Color.fromRGBO(255,255,255,0.15),
+    primaryIconTheme: theme.primaryIconTheme.copyWith(color: BLUE),
+    primaryColorBrightness: Brightness.dark,
+  );
+  }
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    // las accionde de nuuestro AppBar (limpiar o cancelar busqueda)
+    // action of appbar (clean or cancel)
     return [
       IconButton(
         icon: Icon(Icons.clear),
         onPressed: (){
-          query = ''; //el boton para limpiar el texto
+          query = ''; // clean the query
         },
       )
     ];
@@ -23,10 +31,10 @@ class DataSearch extends SearchDelegate{
 
   @override
   Widget buildLeading(BuildContext context) {
-    // icono a la izquierda del appbar
+    // left icon of appbar
     return IconButton(
       icon: AnimatedIcon(
-        color: Colors.red,
+        color: BLUE,
         icon: AnimatedIcons.menu_arrow,
         progress: transitionAnimation
       ),
@@ -38,10 +46,10 @@ class DataSearch extends SearchDelegate{
 
   @override
   Widget buildResults(BuildContext context) {
-    // crea los resultados que vamos a mostrar
+    // the results that going to show
     return Center(
       child: Container(
-        child: Text(seleccion),
+        child: Text(results),
         color: Colors.deepOrangeAccent,
       )
     );
@@ -49,71 +57,8 @@ class DataSearch extends SearchDelegate{
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // son las sugerencias que aparecen cuando la persona escribe
-
-    // if(query.isEmpty){
-    //   return Container();
-    // }
-    // return FutureBuilder(
-    //   future: peliculasProvider.buscarPelicula(query),
-    //   builder: (BuildContext context, AsyncSnapshot<List<Pelicula>> snapshot) {
-
-    //     if(snapshot.hasData){
-
-    //       final peliculas = snapshot.data;
-
-    //       return ListView(
-    //         children: peliculas.map((pelicula){
-    //           return ListTile(
-    //             leading: FadeInImage(
-    //               image: NetworkImage(pelicula.getPosterImg()),
-    //               placeholder: AssetImage('assets/img/no-image.jpg'),
-    //               height: 50.0,
-    //               fit: BoxFit.contain,
-    //             ),
-    //             title: Text(pelicula.title),
-    //             subtitle: Text('Votos promedio: '+pelicula.voteAverage.toString()),
-    //             onTap: (){
-    //               close(context, null);
-    //               pelicula.idUnico = '';
-    //               Navigator.pushNamed(context, 'detalle', arguments: pelicula);
-    //             },
-    //           );
-    //         }).toList()
-    //       );
-    //     }else{
-    //       return Center(
-    //         child: CircularProgressIndicator(),
-    //       );
-    //     }
-    //   },
-    // );
+    
     return Container();
 
   }
-  // @override FUE USADO PARA PRUEBAS DE BUSQUEDAS DE LISTAS LOCAL
-  // Widget buildSuggestions(BuildContext context) {
-  //   // son las sugerencias que aparecen cuando la persona escribe
-
-  // final listaSugerida = (query.isEmpty)
-  //                                       ? peliculasRecientes 
-  //                                       : peliculas.where(
-  //                                         (p) => p.toLowerCase().startsWith(query.toLowerCase())
-  //                                         ).toList();
-
-  //   return ListView.builder(
-  //     itemCount: listaSugerida.length,
-  //     itemBuilder: (context, i){
-  //       return ListTile(
-  //         leading: Icon(Icons.local_movies),
-  //         title: Text(listaSugerida[i]),
-  //         onTap: (){
-  //           seleccion = listaSugerida[i];
-  //           showResults(context); //este metodo construye los resultados
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
-
 }

@@ -8,3 +8,4 @@ const YELLOW = Color(0xFFFFF052);
 const BLACK = Color(0xFF151515);
 const CREAM = Color(0xFFF3F0DC);
 const WHITE = Color(0xFFFFFFFF);
+const DEEPGREY = Color.fromRGBO(39,38,38,1);

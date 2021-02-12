@@ -4,6 +4,7 @@ import 'package:ultra_gif/src/models/gif_model.dart';
 import '../colors.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:share/share.dart';
  
 class MyStaggeredGridview extends StatelessWidget {
 
@@ -18,26 +19,31 @@ class MyStaggeredGridview extends StatelessWidget {
       crossAxisCount: 4,
       itemCount: gifs.length,
       itemBuilder: (BuildContext context, int index) {
+        String gifUrl = '${gifs[index].images.fixedHeight.imageUrl}';
+        String embedUrl = '${gifs[index].embedUrl}';
+        double height = double.parse('${gifs[index].images.fixedHeight.height}');
+        double width = double.parse('${gifs[index].images.fixedHeight.width}');
         return GestureDetector(
           onTap: () async {
             await showDialog(
               context: context,
               builder: (context) {
                 return Dialog(
-                  backgroundColor: Colors.transparent,
+                  backgroundColor: Colors.red,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Container(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(6),
-                          child: FadeInImage(
-                            image: NetworkImage('${gifs[index].images.original.imageUrl}'),
-                            placeholder: AssetImage('assets/images/no-image.png'),
-                            fit: BoxFit.cover,
-                          ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(6),
+                        child: FadeInImage(
+                          image: NetworkImage(gifUrl),
+                          placeholder: AssetImage('assets/images/no-image.png'),
+                          height: height,
+                          width: width,
+                          fit: BoxFit.contain,
+                          alignment: Alignment.bottomRight,
                         ),
                       ),
                       SizedBox(height: 5),
@@ -52,11 +58,25 @@ class MyStaggeredGridview extends StatelessWidget {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Row(children: [
-                                Text('Share'),
-                                Expanded(child: Container()),
-                                Icon(Icons.share, size: 12)
-                            ],),
+                            GestureDetector(
+                              onTap:(){
+                                RenderBox box = context.findRenderObject();
+                                Share.share(embedUrl,
+                                    subject: gifUrl,
+                                    sharePositionOrigin:
+                                    box.localToGlobal(Offset.zero) &
+                                    box.size);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 1),
+                                color: Colors.transparent,
+                                child: Row(children: [
+                                    Text('Share'),
+                                    Expanded(child: Container()),
+                                    Icon(Icons.share, size: 12)
+                                ],),
+                              ),
+                            ),
                             Divider(),
                             Row(children: [
                                 Text('Save'),
@@ -93,7 +113,7 @@ class MyStaggeredGridview extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(3),
               child: FadeInImage(
-                image: NetworkImage('${gifs[index].images.original.imageUrl}'),
+                image: NetworkImage(gifUrl),
                 placeholder: AssetImage('assets/images/no-image.png'),
                 fit: BoxFit.cover,
               ),

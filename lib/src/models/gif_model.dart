@@ -76,13 +76,16 @@ class Gif {
 
 class Images {
   Original original;
+  FixedHeight fixedHeight;
   
   Images({
-    this.original
+    this.original,
+    this.fixedHeight
   });
 
   Images.fromJsonMap(Map<String, dynamic> json){
     original  = Original.fromJsonMap(json['original']);
+    fixedHeight  = FixedHeight.fromJsonMap(json['fixed_height']);
   }
 }
   
@@ -98,6 +101,24 @@ class Original {
   });
 
   Original.fromJsonMap(Map<String, dynamic> json){
+    imageUrl  = json['url'];
+    height    = json['height'] ;
+    width    = json['width'] ;
+  }
+}
+
+class FixedHeight {
+  String imageUrl;
+  String height;
+  String width;
+
+  FixedHeight({
+    this.imageUrl,
+    this.height,
+    this.width
+  });
+
+  FixedHeight.fromJsonMap(Map<String, dynamic> json){
     imageUrl  = json['url'];
     height    = json['height'] ;
     width    = json['width'] ;

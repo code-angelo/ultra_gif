@@ -32,6 +32,27 @@ class GifProvider{
     return gifs.items;
 
   }
+  Future <List<Gif>> searchGif(String query) async {
+
+    // https://api.giphy.com/v1/gifs/search?api_key=7B8upN4OGacKQV4egxZvqCk4sAgetm58&q=&limit=25&offset=0&rating=g&lang=en
+    final url = Uri.https(_url, '/v1/gifs/search', {
+      'api_key' : _apikey,
+      'q'       : query,
+      'limit'   : _limit,
+      'rating'  : _rating,
+      'lan'     : 'en',
+    });
+
+    final resp = await http.get(url);
+    final decodedData = json.decode(resp.body);
+
+    final gifs = new Gifs.fromJsonList(decodedData['data']);
+  
+    // print(gifs.items[0].title);
+    
+    return gifs.items;
+
+  }
 
 
 

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:ultra_gif/src/colors.dart';
+import 'package:ultra_gif/src/models/gif_model.dart';
+import 'package:ultra_gif/src/providers/gif_provider.dart';
+import 'package:ultra_gif/src/widgets/staggered_gridview_widget.dart';
 
 
 class DataSearch extends SearchDelegate{
 
   String results = '';
+  final gifProvider = new GifProvider();
 
   ThemeData appBarTheme(BuildContext context){
     final ThemeData theme = Theme.of(context);
@@ -23,7 +27,7 @@ class DataSearch extends SearchDelegate{
       IconButton(
         icon: Icon(Icons.clear),
         onPressed: (){
-          query = ''; // clean the query
+          ( query == '' ) ? close(context, null) : query = ''; // close the searchbar o clean query
         },
       )
     ];
@@ -47,18 +51,32 @@ class DataSearch extends SearchDelegate{
   @override
   Widget buildResults(BuildContext context) {
     // the results that going to show
-    return Center(
-      child: Container(
-        child: Text(results),
-        color: Colors.deepOrangeAccent,
-      )
-    );
+    if( query.isNotEmpty){
+      return FutureBuilder(
+        future: gifProvider.searchGif(query),
+        builder: (BuildContext context, AsyncSnapshot <List<Gif>> snapshot){
+          if( snapshot.hasData){
+
+            return MyStaggeredGridview(
+              gifs: snapshot.data
+            );
+          }else{
+            return Center(
+              child: Image(image:  AssetImage('assets/images/loading blocks.gif'), height: 75),
+            );
+          }
+        },
+      );
+    }else{
+      return Center(
+        child: Text('Not found')
+      );
+    }
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    
-    return Container();
 
+    return Container();
   }
 }

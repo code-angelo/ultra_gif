@@ -5,6 +5,7 @@ import '../colors.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:share/share.dart';
+import 'package:cached_network_image/cached_network_image.dart';
  
 class MyStaggeredGridview extends StatelessWidget {
 
@@ -29,7 +30,7 @@ class MyStaggeredGridview extends StatelessWidget {
               context: context,
               builder: (context) {
                 return Dialog(
-                  backgroundColor: Colors.red,
+                  backgroundColor: Colors.transparent,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
@@ -37,14 +38,19 @@ class MyStaggeredGridview extends StatelessWidget {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(6),
-                        child: FadeInImage(
-                          image: NetworkImage(gifUrl),
-                          placeholder: AssetImage('assets/images/no-image.png'),
-                          height: height,
-                          width: width,
+                        child: CachedNetworkImage(
+                          placeholder: (context, url) => Center(child: Image(image:  AssetImage('assets/images/loading blocks.gif'), height: 75)),
+                          imageUrl: gifUrl,
                           fit: BoxFit.contain,
-                          alignment: Alignment.bottomRight,
                         ),
+                        // child: FadeInImage(
+                        //   image: NetworkImage(gifUrl),
+                        //   placeholder: AssetImage('assets/images/no-image.png'),
+                        //   height: height,
+                        //   width: width,
+                        //   fit: BoxFit.contain,
+                        //   alignment: Alignment.bottomRight,
+                        // ),
                       ),
                       SizedBox(height: 5),
                       Container(
@@ -112,11 +118,17 @@ class MyStaggeredGridview extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(3),
-              child: FadeInImage(
-                image: NetworkImage(gifUrl),
-                placeholder: AssetImage('assets/images/no-image.png'),
+              child: CachedNetworkImage(
+                placeholder: (context, url) => Image(image:  AssetImage('assets/images/no-image.png'), fit: BoxFit.cover),
+                imageUrl: gifUrl,
                 fit: BoxFit.cover,
               ),
+
+              // child: FadeInImage(
+              //   image: NetworkImage(gifUrl),
+              //   placeholder: AssetImage('assets/images/no-image.png'),
+              //   fit: BoxFit.cover,
+              // ),
             )
           ),
         );

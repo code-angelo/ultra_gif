@@ -18,14 +18,16 @@ class SearchPage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: BLACK,
         appBar: AppBar(
+          title: Text('Most popular'),
+          backgroundColor: Color.fromRGBO(255,255,255,0.15),
+          elevation: 5,
           bottom: TabBar(
+            indicatorColor: YELLOW,
             tabs: [
               Tab(text: 'Gif',),
               Tab(text: 'Sticker',),
             ],
           ),
-          title: Text('Most popular'),
-          backgroundColor: Color.fromRGBO(255,255,255,0.15),
           actions: [
             Container(
               height: 57,

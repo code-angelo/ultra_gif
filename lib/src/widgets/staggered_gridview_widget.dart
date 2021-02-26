@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ultra_gif/src/models/gif_model.dart';
 
 import '../colors.dart';
+import 'package:ultra_gif/src/models/gif_model.dart';
+import 'package:ultra_gif/src/tools/options.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:share/share.dart';
 import 'package:cached_network_image/cached_network_image.dart';
  
 class MyStaggeredGridview extends StatelessWidget {
@@ -13,6 +13,8 @@ class MyStaggeredGridview extends StatelessWidget {
 
   MyStaggeredGridview({@required this.gifs});
 
+  Options option = Options();
+
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class MyStaggeredGridview extends StatelessWidget {
       crossAxisCount: 4,
       itemCount: gifs.length,
       itemBuilder: (BuildContext context, int index) {
+        String title = '${gifs[index].title}';
         String gifUrl = '${gifs[index].images.fixedHeight.imageUrl}';
         String embedUrl = '${gifs[index].embedUrl}';
         double height = double.parse('${gifs[index].images.fixedHeight.height}');
@@ -34,14 +37,15 @@ class MyStaggeredGridview extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.circular(6),
                         child: CachedNetworkImage(
                           placeholder: (context, url) => Center(child: Image(image:  AssetImage('assets/images/loading blocks.gif'), height: 75)),
                           imageUrl: gifUrl,
-                          fit: BoxFit.contain,
+                          width: 500,
+                          fit: BoxFit.fitWidth,
                         ),
                         // child: FadeInImage(
                         //   image: NetworkImage(gifUrl),
@@ -65,14 +69,7 @@ class MyStaggeredGridview extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             GestureDetector(
-                              onTap:(){
-                                RenderBox box = context.findRenderObject();
-                                Share.share(embedUrl,
-                                    subject: gifUrl,
-                                    sharePositionOrigin:
-                                    box.localToGlobal(Offset.zero) &
-                                    box.size);
-                              },
+                              onTap: () => option.share(context, embedUrl, title),
                               child: Container(
                                 padding: EdgeInsets.symmetric(vertical: 1),
                                 color: Colors.transparent,
@@ -84,11 +81,20 @@ class MyStaggeredGridview extends StatelessWidget {
                               ),
                             ),
                             Divider(),
-                            Row(children: [
-                                Text('Save'),
-                                Expanded(child: Container()),
-                                Icon(Icons.download_sharp, size: 12,)
-                            ],),
+                            GestureDetector(
+                              onTap: (){
+                                option.save(gifUrl);
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(vertical: 1),
+                                color: Colors.transparent,
+                                child: Row(children: [
+                                    Text('Save'),
+                                    Expanded(child: Container()),
+                                    Icon(Icons.download_sharp, size: 12,)
+                                ],),
+                              ),
+                            ),
                             Divider(),
                             Row(children: [
                                 Text('Copy'),

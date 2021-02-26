@@ -10,7 +10,7 @@ class GifProvider{
   String _apikey  = '7B8upN4OGacKQV4egxZvqCk4sAgetm58';
   String _url     = 'api.giphy.com';
   String _limit    = '25';
-  String _rating   = 'g';
+  String _rating   = 'pg-13';
 
 
   Future <List<Gif>> getTrendi() async {

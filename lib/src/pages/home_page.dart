@@ -36,10 +36,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final screen = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: BLACK,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 48.0),
+        padding: EdgeInsets.symmetric(horizontal: screen.width * 0.115),
+        // padding: EdgeInsets.symmetric(horizontal: 48.0),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -64,7 +68,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
 
-              SizedBox(height: 24,),
+              // SizedBox(height: 30),
+              SizedBox(height: screen.height * 0.035),
 
               Container(
                 child: Text(
@@ -73,7 +78,7 @@ class HomePage extends StatelessWidget {
                   textAlign: TextAlign.justify,
                 )
               ),
-              SizedBox(height: 24,),
+              SizedBox(height: screen.height * 0.04),
               Row(
                 children: [
                   Container(
@@ -83,14 +88,14 @@ class HomePage extends StatelessWidget {
                       textAlign: TextAlign.left,
                     )
                   ),
-                  Expanded(child: Container(),),
-                ],
+                ]
               ),
 
-              SizedBox(height: 50,),
+              SizedBox(height: screen.height * 0.035),
 
               Container(
-                height: 48,
+                height: screen.height * 0.057,
+                // height: 48,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [

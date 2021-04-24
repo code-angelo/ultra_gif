@@ -1,6 +1,6 @@
 class Gifs{
 
-  List<Gif> items = List();
+  List<Gif> items = [];
 
   Gifs();
 

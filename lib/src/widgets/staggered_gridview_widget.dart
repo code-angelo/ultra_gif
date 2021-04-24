@@ -13,7 +13,7 @@ class MyStaggeredGridview extends StatelessWidget {
 
   MyStaggeredGridview({@required this.gifs});
 
-  Options option = Options();
+  final Options option = Options();
 
 
   @override
@@ -23,10 +23,10 @@ class MyStaggeredGridview extends StatelessWidget {
       itemCount: gifs.length,
       itemBuilder: (BuildContext context, int index) {
         String title = '${gifs[index].title}';
-        String gifUrl = '${gifs[index].images.fixedHeight.imageUrl}';
-        String embedUrl = '${gifs[index].embedUrl}';
-        double height = double.parse('${gifs[index].images.fixedHeight.height}');
-        double width = double.parse('${gifs[index].images.fixedHeight.width}');
+        String fixedheight = '${gifs[index].images.fixedHeight.imageUrl}';
+        String preview = '${gifs[index].images.original.imageUrl}';
+        String shareOrSave = '${gifs[index].images.original.imageUrl}';
+
         return GestureDetector(
           onTap: () async {
             await showDialog(
@@ -43,12 +43,12 @@ class MyStaggeredGridview extends StatelessWidget {
                         borderRadius: BorderRadius.circular(6),
                         child: CachedNetworkImage(
                           placeholder: (context, url) => Center(child: Image(image:  AssetImage('assets/images/loading blocks.gif'), height: 75)),
-                          imageUrl: gifUrl,
+                          imageUrl: preview,
                           width: 500,
                           fit: BoxFit.fitWidth,
                         ),
                         // child: FadeInImage(
-                        //   image: NetworkImage(gifUrl),
+                        //   image: NetworkImage(preview),
                         //   placeholder: AssetImage('assets/images/no-image.png'),
                         //   height: height,
                         //   width: width,
@@ -69,7 +69,7 @@ class MyStaggeredGridview extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             GestureDetector(
-                              onTap: () => option.share(context, embedUrl, title),
+                              onTap: () => option.share(context, shareOrSave, title),
                               child: Container(
                                 padding: EdgeInsets.symmetric(vertical: 1),
                                 color: Colors.transparent,
@@ -83,7 +83,7 @@ class MyStaggeredGridview extends StatelessWidget {
                             Divider(),
                             GestureDetector(
                               onTap: (){
-                                option.save(gifUrl);
+                                option.save(context, shareOrSave);
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(vertical: 1),
@@ -126,12 +126,12 @@ class MyStaggeredGridview extends StatelessWidget {
               borderRadius: BorderRadius.circular(3),
               child: CachedNetworkImage(
                 placeholder: (context, url) => Image(image:  AssetImage('assets/images/no-image.png'), fit: BoxFit.cover),
-                imageUrl: gifUrl,
+                imageUrl: fixedheight,
                 fit: BoxFit.cover,
               ),
 
               // child: FadeInImage(
-              //   image: NetworkImage(gifUrl),
+              //   image: NetworkImage(fixedheight),
               //   placeholder: AssetImage('assets/images/no-image.png'),
               //   fit: BoxFit.cover,
               // ),
@@ -141,8 +141,8 @@ class MyStaggeredGridview extends StatelessWidget {
       } ,
       staggeredTileBuilder: (int index) => StaggeredTile.count(2, index.isEven ? 2 : 1),
       // staggeredTileBuilder: (int index) => StaggeredTile.fit(2),
-      mainAxisSpacing: 4.0,
-      crossAxisSpacing: 4.0,
+      mainAxisSpacing: 5.0,
+      crossAxisSpacing: 5.0,
     );
   }
 }

@@ -1,0 +1,96 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter run --machine --target lib\main.dart -d 192.168.153.103:5555 --dart-define=flutter.inspector.structuredErrors=true --start-paused --web-server-debug-protocol ws --web-allow-expose-url --devtools-server-address http://127.0.0.1:9100/
+
+## exception
+
+ProcessException: ProcessException: Process exited abnormally:
+adb.exe: error: more than one device/emulator
+  Command: C:\Users\Angel Rosillo\AppData\Local\Android\sdk\platform-tools\adb.exe -s 192.168.153.103:5555 forward --remove tcp:60948
+
+```
+#0      RunResult.throwException (package:flutter_tools/src/base/process.dart:171:5)
+#1      AndroidDevicePortForwarder.unforward (package:flutter_tools/src/android/android_device.dart:1318:15)
+<asynchronous suspension>
+#2      AndroidDevicePortForwarder.dispose (package:flutter_tools/src/android/android_device.dart:1324:7)
+<asynchronous suspension>
+#3      AndroidDevice.dispose (package:flutter_tools/src/android/android_device.dart:821:5)
+<asynchronous suspension>
+#4      HotRunner.cleanupAtFinish (package:flutter_tools/src/run_hot.dart:1176:7)
+<asynchronous suspension>
+#5      ResidentRunner.waitForAppToFinish (package:flutter_tools/src/resident_runner.dart:1394:5)
+<asynchronous suspension>
+#6      RunCommand.runCommand (package:flutter_tools/src/commands/run.dart:548:26)
+<asynchronous suspension>
+#7      FlutterCommand.verifyThenRunCommand (package:flutter_tools/src/runner/flutter_command.dart:1157:12)
+<asynchronous suspension>
+#8      FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1009:27)
+<asynchronous suspension>
+#9      AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#10     AppContext.run (package:flutter_tools/src/base/context.dart:149:12)
+<asynchronous suspension>
+#11     CommandRunner.runCommand (package:args/command_runner.dart:197:13)
+<asynchronous suspension>
+#12     FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:278:9)
+<asynchronous suspension>
+#13     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#14     AppContext.run (package:flutter_tools/src/base/context.dart:149:12)
+<asynchronous suspension>
+#15     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:234:5)
+<asynchronous suspension>
+#16     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:64:9)
+<asynchronous suspension>
+#17     run.<anonymous closure> (package:flutter_tools/runner.dart:62:12)
+<asynchronous suspension>
+#18     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#19     AppContext.run (package:flutter_tools/src/base/context.dart:149:12)
+<asynchronous suspension>
+#20     runInContext (package:flutter_tools/src/context_runner.dart:73:10)
+<asynchronous suspension>
+#21     main (package:flutter_tools/executable.dart:90:3)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 2.0.5, on Microsoft Windows [VersiÃ³n 10.0.19042.868], locale es-MX)
+    • Flutter version 2.0.5 at C:\src\flutter
+    • Framework revision adc687823a (3 weeks ago), 2021-04-16 09:40:20 -0700
+    • Engine revision b09f014e96
+    • Dart version 2.12.3
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 30.0.3)
+    • Android SDK at C:\Users\Angel Rosillo\AppData\Local\Android\sdk
+    • Platform android-30, build-tools 30.0.3
+    • Java binary at: C:\Program Files\Android\Android Studio\jre\bin\java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
+    • All Android licenses accepted.
+
+[✗] Chrome - develop for the web (Cannot find Chrome executable at .\Google\Chrome\Application\chrome.exe)
+    ! Cannot find Chrome. Try setting CHROME_EXECUTABLE to a Chrome executable.
+
+[✓] Android Studio (version 4.1.0)
+    • Android Studio at C:\Program Files\Android\Android Studio
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
+
+[✓] VS Code (version 1.56.0)
+    • VS Code at C:\Users\Angel Rosillo\AppData\Local\Programs\Microsoft VS Code
+    • Flutter extension version 3.22.0
+
+[✓] Connected device (2 available)
+    • Xiaomi Redmi Note 7 (mobile) • 192.168.153.103:5555 • android-x86    • Android 9 (API 28)
+    • Edge (web)                   • edge                 • web-javascript • Microsoft Edge 90.0.818.56
+
+! Doctor found issues in 1 category.
+```

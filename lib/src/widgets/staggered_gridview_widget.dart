@@ -35,118 +35,122 @@ class MyStaggeredGridview extends StatelessWidget {
                 builder: (context) {
                   return Dialog(
                     backgroundColor: Colors.transparent,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(6),
-                          child: CachedNetworkImage(
-                            placeholder: (context, url) => Center(
-                                child: Image(
-                                    image: AssetImage(
-                                        'assets/images/loading blocks.gif'),
-                                    height: 75)),
-                            imageUrl: preview,
-                            width: 500,
-                            fit: BoxFit.fitWidth,
-                          ),
-                          // child: FadeInImage(
-                          //   image: NetworkImage(preview),
-                          //   placeholder: AssetImage('assets/images/no-image.png'),
-                          //   height: height,
-                          //   width: width,
-                          //   fit: BoxFit.contain,
-                          //   alignment: Alignment.bottomRight,
-                          // ),
-                        ),
-                        SizedBox(height: 5),
-                        Container(
-                          width: 176,
-                          decoration: BoxDecoration(
-                            color: DEEPGREY,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ClipRRect(
                             borderRadius: BorderRadius.circular(6),
+                            child: CachedNetworkImage(
+                              placeholder: (context, url) => Center(
+                                  child: Image(
+                                      image: AssetImage(
+                                          'assets/images/loading blocks.gif'),
+                                      height: 75)),
+                              imageUrl: preview,
+                              width: 500,
+                              fit: BoxFit.fitWidth,
+                            ),
+                            // child: FadeInImage(
+                            //   image: NetworkImage(preview),
+                            //   placeholder: AssetImage('assets/images/no-image.png'),
+                            //   height: height,
+                            //   width: width,
+                            //   fit: BoxFit.contain,
+                            //   alignment: Alignment.bottomRight,
+                            // ),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Container(
-                                width: double.infinity,
-                                height: myHeight,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                  shape: BoxShape.rectangle,
+                          SizedBox(height: 5),
+                          Container(
+                            width: 176,
+                            decoration: BoxDecoration(
+                              color: DEEPGREY,
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  width: double.infinity,
+                                  height: myHeight,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                    shape: BoxShape.rectangle,
+                                  ),
+                                  child: MaterialButton(
+                                      height: myHeight,
+                                      color: Colors.transparent,
+                                      splashColor: YELLOW,
+                                      elevation: 0,
+                                      onPressed: () => {
+                                            option.share(
+                                                context, shareOrSave, title)
+                                          },
+                                      child: Row(
+                                        children: [
+                                          Text('Share'),
+                                          Expanded(child: Container()),
+                                          Icon(Icons.share, size: 12)
+                                        ],
+                                      )),
                                 ),
-                                child: MaterialButton(
-                                    height: myHeight,
-                                    color: Colors.transparent,
-                                    elevation: 0,
-                                    onPressed: () => {
-                                          option.share(
-                                              context, shareOrSave, title)
-                                        },
-                                    child: Row(
-                                      children: [
-                                        Text('Share'),
-                                        Expanded(child: Container()),
-                                        Icon(Icons.share, size: 12)
-                                      ],
-                                    )),
-                              ),
-                              Divider(),
-                              Container(
-                                height: myHeight,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                  shape: BoxShape.rectangle,
+                                Divider(),
+                                Container(
+                                  height: myHeight,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                    shape: BoxShape.rectangle,
+                                  ),
+                                  child: MaterialButton(
+                                      height: myHeight,
+                                      color: Colors.transparent,
+                                      splashColor: YELLOW,
+                                      elevation: 0,
+                                      onPressed: () =>
+                                          {option.save(context, shareOrSave)},
+                                      child: Row(
+                                        children: [
+                                          Text('Save'),
+                                          Expanded(child: Container()),
+                                          Icon(
+                                            Icons.download_sharp,
+                                            size: 12,
+                                          )
+                                        ],
+                                      )),
                                 ),
-                                child: MaterialButton(
-                                    height: myHeight,
-                                    color: Colors.transparent,
-                                    elevation: 0,
-                                    onPressed: () =>
-                                        {option.save(context, shareOrSave)},
-                                    child: Row(
-                                      children: [
-                                        Text('Save'),
-                                        Expanded(child: Container()),
-                                        Icon(
-                                          Icons.download_sharp,
-                                          size: 12,
-                                        )
-                                      ],
-                                    )),
-                              ),
-                              Divider(),
-                              Container(
-                                height: myHeight,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                  shape: BoxShape.rectangle,
+                                Divider(),
+                                Container(
+                                  height: myHeight,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                    shape: BoxShape.rectangle,
+                                  ),
+                                  child: MaterialButton(
+                                      height: myHeight,
+                                      color: Colors.transparent,
+                                      elevation: 0,
+                                      onPressed: () => {},
+                                      child: Row(
+                                        children: [
+                                          Text('Copy'),
+                                          Expanded(child: Container()),
+                                          Icon(Icons.content_copy, size: 12)
+                                        ],
+                                      )),
                                 ),
-                                child: MaterialButton(
-                                    height: myHeight,
-                                    color: Colors.transparent,
-                                    elevation: 0,
-                                    onPressed: () => {},
-                                    child: Row(
-                                      children: [
-                                        Text('Copy'),
-                                        Expanded(child: Container()),
-                                        Icon(Icons.content_copy, size: 12)
-                                      ],
-                                    )),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 });

@@ -12,12 +12,7 @@ class DataSearch extends SearchDelegate{
   final gifProvider = new GifProvider();
 
   ThemeData appBarTheme(BuildContext context){
-    final ThemeData theme = Theme.of(context);
-    return theme.copyWith(
-    primaryColor: Color.fromRGBO(255,255,255,0.15),
-    primaryIconTheme: theme.primaryIconTheme.copyWith(color: BLUE),
-    primaryColorBrightness: Brightness.dark,
-  );
+    return Theme.of(context);
   }
 
   @override
@@ -38,7 +33,7 @@ class DataSearch extends SearchDelegate{
     // left icon of appbar
     return IconButton(
       icon: AnimatedIcon(
-        color: BLUE,
+        // color: BLUE,
         icon: AnimatedIcons.menu_arrow,
         progress: transitionAnimation
       ),

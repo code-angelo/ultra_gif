@@ -16,10 +16,8 @@ class SearchPage extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: BLACK,
         appBar: AppBar(
           title: Text('Most popular'),
-          backgroundColor: Color.fromRGBO(255,255,255,0.15),
           elevation: 5,
           bottom: TabBar(
             indicatorColor: YELLOW,
@@ -43,7 +41,7 @@ class SearchPage extends StatelessWidget {
                 )
               ),
               child: GestureDetector(
-                child: Icon(Icons.search),
+                child: Icon(Icons.search, color: WHITE,),
                 onTap: (){
                   showSearch(
                     context: context, 

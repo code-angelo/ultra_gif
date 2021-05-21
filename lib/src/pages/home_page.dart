@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../colors.dart';
 
@@ -49,23 +50,27 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
+                // height: 50,
+                width: double.infinity,
+                child: SvgPicture.asset('assets/LOGO.svg', semanticsLabel: 'Acme Logo'),
+                
                 // color: Colors.red,
                 // margin: EdgeInsets.symmetric(horizontal: 20),
-                child: RichText(
-                  textAlign: TextAlign.justify,
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: "WELCOME TO", 
-                        style: tittle,
-                      ),
-                      TextSpan(
-                        text: " ULTRA\nGIF", 
-                        style: tittle_2,
-                      ),
-                    ]
-                  ),
-                ),
+                // child: RichText(
+                //   textAlign: TextAlign.justify,
+                //   text: TextSpan(
+                //     children: <TextSpan>[
+                //       TextSpan(
+                //         text: "WELCOME TO", 
+                //         style: tittle,
+                //       ),
+                //       TextSpan(
+                //         text: " ULTRA\nGIF", 
+                //         style: tittle_2,
+                //       ),
+                //     ]
+                //   ),
+                // ),
               ),
 
               // SizedBox(height: 30),
@@ -109,7 +114,7 @@ class HomePage extends StatelessWidget {
                 ),
                 child: GestureDetector(
                   onTap: (){
-                    Navigator.pushNamed(context, 'search');
+                    Navigator.pushReplacementNamed(context, 'search');
                     // showSearch(
                     //   context: context, 
                     //   delegate: DataSearch(), //uso de la clase abstracta de la busqueda
